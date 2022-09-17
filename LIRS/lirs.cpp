@@ -21,12 +21,12 @@ void Entry::SetStatus(Status status)
 
 //////////////////////////////////////////////////////////////////////////
 
-int StackBase::Size()
+int Stack::Size()
 {
     return stack_.size();
 }
 
-int StackBase::Find(const int &key)
+int Stack::Find(const int &key)
 {
     int result = -1;
     int position = 0;
@@ -42,17 +42,17 @@ int StackBase::Find(const int &key)
     return result;
 }
 
-EntryPointer StackBase::GetTop()
+EntryPointer Stack::GetTop()
 {
     return stack_[stack_.size() - 1];
 }
 
-EntryPointer StackBase::GetBottom()
+EntryPointer Stack::GetBottom()
 {
     return stack_[0];
 }
 
-EntryPointer StackBase::GetEntry(const int &pos)
+EntryPointer Stack::GetEntry(const int &pos)
 {
     if (pos < 0 || pos >= stack_.size())
     {
@@ -61,19 +61,19 @@ EntryPointer StackBase::GetEntry(const int &pos)
     return stack_[pos];
 }
 
-void StackBase::EmplaceTop(EntryPointer entry)
+void Stack::EmplaceTop(EntryPointer entry)
 {
     stack_.emplace_back(entry);
 }
 
-EntryPointer StackBase::EraseBottom()
+EntryPointer Stack::EraseBottom()
 {
     EntryPointer entry = stack_[0];
     stack_.erase(stack_.begin());
     return entry;
 }
 
-void StackBase::Erase(const int &pos)
+void Stack::Erase(const int &pos)
 {
     if (pos <0 || pos >= stack_.size())
     {
@@ -82,7 +82,7 @@ void StackBase::Erase(const int &pos)
     stack_.erase(stack_.begin() + pos);
 }
 
-void StackBase::MoveToTop(const int &pos)
+void Stack::MoveToTop(const int &pos)
 {
     if (pos < 0 || pos >= stack_.size())
     {
@@ -94,7 +94,7 @@ void StackBase::MoveToTop(const int &pos)
     stack_.emplace_back(entry);
 }
 
-void StackBase::Pruning()
+void Stack::Pruning()
 {
     while (!stack_.empty() && GetBottom()->GetStatus() != Status::kLir &&
         GetBottom()->GetStatus() != Status::kInvalid)
@@ -124,7 +124,7 @@ std::string StatusToString(const Status &status)
     return "Invalid --";
 }
 
-void StackBase::Print()
+void Stack::Print()
 {
     std::vector<std::string> hash = { "","A","B","C","D","E" };
     std::cout << "Size=" << stack_.size() << std::endl;
@@ -274,12 +274,12 @@ void LIRS::DynamicRegulation(const int &pos)
     stack_s_.Pruning(); // 栈S栈底的LIR已经变成了resident HIR块,在栈剪枝时会被自动删除
 }
 
-StackBase LIRS::GetS()
+Stack LIRS::GetS()
 {
     return stack_s_;
 }
 
-StackBase LIRS::GetQ()
+Stack LIRS::GetQ()
 {
     return stack_q_;
 }

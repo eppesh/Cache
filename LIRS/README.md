@@ -402,7 +402,15 @@ else    // cache中已存在
 }
 ```
 
+## 测试
 
+源码中有3种测试，分别是模拟论文中Table1中的例子，单个缓存大小的测试和多个缓存大小的测试。
+
+部分结果如下图所示：
+
+<img src="https://raw.githubusercontent.com/eppesh/pic/main/20220917225833.png" style="zoom:67%;" />
+
+![](https://raw.githubusercontent.com/eppesh/pic/main/20220917225624.png)
 
 # 参考资料
 

@@ -45,7 +45,7 @@ using EntryPointer = std::shared_ptr<Entry>;
 
 // The base class of StackS and StackQ.
 // 栈S和栈Q类似于LRU栈,有一些共同特征
-class StackBase
+class Stack
 {
 public:
     // 获取栈大小
@@ -109,8 +109,8 @@ public:
     size_t GetMissCount();
 
     // get the stack S/Q
-    StackBase GetS();
-    StackBase GetQ();
+    Stack GetS();
+    Stack GetQ();
 
     // print the element in cache
     void PrintCache();
@@ -133,10 +133,9 @@ private:
     size_t miss_count_;
 
     std::vector<std::pair<int,int>> cache_;        // use vector as the cache
-    //std::vector<int> cache_;        // use vector as the cache
 
-    StackBase stack_s_;
-    StackBase stack_q_;
+    Stack stack_s_;
+    Stack stack_q_;
 };
 } // namespace sh_cache
 
